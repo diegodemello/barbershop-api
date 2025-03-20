@@ -9,9 +9,6 @@ import br.com.dio.barbershop.controller.response.UpdateClientResponse;
 import br.com.dio.barbershop.entity.ClientEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
-import javax.validation.Valid;
-
 import java.util.List;
 
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
@@ -26,11 +23,12 @@ public interface ClientMapper {
     SaveClientResponse toSaveResponse(final ClientEntity entity);
 
     @Mapping(target = "schedules", ignore = true)
-    ClientEntity toEntity(final long id, UpdateClientRequest request);
+    ClientEntity toEntity(final long id, final UpdateClientRequest request);
 
     UpdateClientResponse toUpdateResponse(final ClientEntity entity);
 
     ClientDetailResponse toDetailResponse(final ClientEntity entity);
 
     List<ListClientResponse> toListResponse(final List<ClientEntity> entities);
+
 }

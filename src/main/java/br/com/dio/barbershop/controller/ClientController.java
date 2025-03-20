@@ -23,6 +23,7 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 @RequestMapping("clients")
 @AllArgsConstructor
 public class ClientController {
+
     private final ClientService service;
     private final ClientQueryService queryService;
     private final ClientMapper mapper;
@@ -59,4 +60,5 @@ public class ClientController {
         var entities = queryService.list();
         return mapper.toListResponse(entities);
     }
+
 }

@@ -6,8 +6,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 public interface ScheduleQueryService {
-
-    ScheduleEntity findById(final Long id);
+    ScheduleEntity findById(final long id);
 
     List<ScheduleEntity> findInMonth(final OffsetDateTime startAt, final OffsetDateTime endAt);
 

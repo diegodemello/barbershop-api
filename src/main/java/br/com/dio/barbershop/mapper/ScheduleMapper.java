@@ -1,12 +1,16 @@
 package br.com.dio.barbershop.mapper;
 
 import br.com.dio.barbershop.controller.request.SaveScheduleRequest;
+import br.com.dio.barbershop.controller.response.ClientScheduleAppointmentResponse;
 import br.com.dio.barbershop.controller.response.SaveScheduleResponse;
+import br.com.dio.barbershop.controller.response.ScheduleAppointmentMonthResponse;
 import br.com.dio.barbershop.entity.ScheduleEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import javax.validation.Valid;
+
+import java.util.List;
 
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 
@@ -16,6 +20,16 @@ public interface ScheduleMapper {
     @Mapping(target = "client.id", source = "clientId")
     ScheduleEntity toEntity(final SaveScheduleRequest request);
 
-    @Mapping(target = "client.id", source = "client.id")
+    @Mapping(target = "clientId", source = "client.id")
     SaveScheduleResponse toSaveResponse(final ScheduleEntity entity);
+
+    @Mapping(target = "scheduledAppointments", expression = "java(toClientMonthResponse(entities))")
+    ScheduleAppointmentMonthResponse toMonthResponse(final int year, final int month, final List<ScheduleEntity> entities);
+
+    List<ClientScheduleAppointmentResponse> toClientMonthResponse(final List<ScheduleEntity> entities);
+
+    @Mapping(target = "clientId", source = "client.id")
+    @Mapping(target = "clientName", source = "client.name")
+    @Mapping(target = "day", expression = "java(entity.getStartAt().getDayOfMonth())")
+    ClientScheduleAppointmentResponse toClientMonthResponse(final ScheduleEntity entity);
 }

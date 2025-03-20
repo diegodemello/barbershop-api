@@ -11,5 +11,4 @@ public record ClientDetailResponse(
         String email,
         @JsonProperty("phone")
         String phone
-) {
-}
+) {}

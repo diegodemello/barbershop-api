@@ -18,20 +18,23 @@ public class ScheduleQueryService implements br.com.dio.barbershop.service.query
     private final ScheduleRepository repository;
 
     @Override
-    public ScheduleEntity findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new NotFoundException("Agendamento não encontrado."));
+    public ScheduleEntity findById(final long id) {
+        return repository.findById(id).orElseThrow(
+                () -> new NotFoundException("Agendamento não encontrado")
+        );
     }
 
     @Override
-    public List<ScheduleEntity> findInMonth(OffsetDateTime startAt, OffsetDateTime endAt) {
+    public List<ScheduleEntity> findInMonth(final OffsetDateTime startAt, final OffsetDateTime endAt) {
         return repository.findByStartAtGreaterThanEqualAndEndAtLessThanEqualOrderByStartAtAscEndAtAsc(startAt, endAt);
     }
 
     @Override
-    public void verifyIfScheduleExists(OffsetDateTime startAt, OffsetDateTime endAt) {
-        if(repository.existsByStartAtAndEndAt(startAt, endAt)){
-            var message = "Já existe um cliente agendado no horário solicitado.";
+    public void verifyIfScheduleExists(final OffsetDateTime startAt, final OffsetDateTime endAt) {
+        if (repository.existsByStartAtAndEndAt(startAt, endAt)){
+            var message = "Já existe um cliente agendado no horário solicitado";
             throw new ScheduleInUseException(message);
         }
     }
+
 }

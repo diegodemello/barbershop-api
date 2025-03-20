@@ -9,18 +9,22 @@ import lombok.ToString;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
-@Entity
-@Table(name = "SCHEDULES",
-        uniqueConstraints = {
-            @UniqueConstraint(name = "UK_SCHEDULE_INTERVAL", columnNames = {"start_at", "end_at"})
-        })
+import static jakarta.persistence.GenerationType.IDENTITY;
 
+@Entity
+@Table(
+        name = "SCHEDULES",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "UK_SCHEDULE_INTERVAL", columnNames = {"start_at", "end_at"}),
+        }
+)
 @Getter
 @Setter
 @ToString
 public class ScheduleEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @Column(nullable = false, name = "start_at")
@@ -35,10 +39,11 @@ public class ScheduleEntity {
     private ClientEntity client = new ClientEntity();
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        ScheduleEntity that = (ScheduleEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(startAt, that.startAt) && Objects.equals(endAt, that.endAt);
+    public boolean equals(final Object o) {
+        if (!(o instanceof ScheduleEntity that)) return false;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(startAt, that.startAt) &&
+                Objects.equals(endAt, that.endAt);
     }
 
     @Override

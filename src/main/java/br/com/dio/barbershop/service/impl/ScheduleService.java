@@ -13,13 +13,14 @@ public class ScheduleService implements br.com.dio.barbershop.service.ScheduleSe
     private final ScheduleQueryService queryService;
 
     @Override
-    public ScheduleEntity save(ScheduleEntity entity) {
+    public ScheduleEntity save(final ScheduleEntity entity) {
         queryService.verifyIfScheduleExists(entity.getStartAt(), entity.getEndAt());
+
         return repository.save(entity);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(final long id) {
         queryService.findById(id);
         repository.deleteById(id);
     }

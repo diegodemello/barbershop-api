@@ -12,7 +12,8 @@ public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> 
 
     List<ScheduleEntity> findByStartAtGreaterThanEqualAndEndAtLessThanEqualOrderByStartAtAscEndAtAsc(
             final OffsetDateTime startAt,
-            final OffsetDateTime endAt);
+            final OffsetDateTime endAt
+    );
 
     boolean existsByStartAtAndEndAt(final OffsetDateTime startAt, final OffsetDateTime endAt);
 
