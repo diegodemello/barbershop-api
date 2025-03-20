@@ -10,8 +10,10 @@ import java.util.List;
 @Repository
 public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> {
 
-    List<ScheduleEntity> findByStartAtGreaterThanEqualAndEndAtLessThenEqualOrderByStartAtEndAt(final OffsetDateTime startAt, final OffsetDateTime endAt);
+    List<ScheduleEntity> findByStartAtGreaterThanEqualAndEndAtLessThanEqualOrderByStartAtAscEndAtAsc(
+            final OffsetDateTime startAt,
+            final OffsetDateTime endAt);
 
-    boolean existsStartAtAndEndAt(final OffsetDateTime startAt, final OffsetDateTime endAt);
+    boolean existsByStartAtAndEndAt(final OffsetDateTime startAt, final OffsetDateTime endAt);
 
 }

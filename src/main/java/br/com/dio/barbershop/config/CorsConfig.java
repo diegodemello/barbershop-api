@@ -29,4 +29,5 @@ public class CorsConfig {
         bean.setOrder(HIGHEST_PRECEDENCE);
 
         return bean;
+    }
 }

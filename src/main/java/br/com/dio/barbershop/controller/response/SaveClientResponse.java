@@ -1,8 +1,7 @@
 package br.com.dio.barbershop.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-public record ClientDetailResponse(
+public record SaveClientResponse(
         @JsonProperty("id")
         Long id,
         @JsonProperty("name")

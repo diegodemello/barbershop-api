@@ -24,12 +24,12 @@ public class ScheduleQueryService implements br.com.dio.barbershop.service.query
 
     @Override
     public List<ScheduleEntity> findInMonth(OffsetDateTime startAt, OffsetDateTime endAt) {
-        return repository.findByStartAtGreaterThanEqualAndEndAtLessThenEqualOrderByStartAtEndAt(startAt, endAt);
+        return repository.findByStartAtGreaterThanEqualAndEndAtLessThanEqualOrderByStartAtAscEndAtAsc(startAt, endAt);
     }
 
     @Override
     public void verifyIfScheduleExists(OffsetDateTime startAt, OffsetDateTime endAt) {
-        if(repository.existsStartAtAndEndAt(startAt, endAt)){
+        if(repository.existsByStartAtAndEndAt(startAt, endAt)){
             var message = "Já existe um cliente agendado no horário solicitado.";
             throw new ScheduleInUseException(message);
         }
